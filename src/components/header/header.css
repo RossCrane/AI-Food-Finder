@@ -1,0 +1,67 @@
+/* .header {
+	z-index: 10;
+	top: 0;
+	height: 9vh;
+	width: 100vw;
+	background: linear-gradient(
+		90deg,
+		rgb(255 255 255) 0%,
+		rgb(149 255 214) 45%,
+		rgb(237 145 255) 55%,
+		rgb(170, 1, 170) 100%
+	);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024",endColorstr="#020024",GradientType=1);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020024",endColorstr="#020024",GradientType=1);
+	padding: 0 7.5vh;
+	display: flex;
+	justify-content: space-between;
+	box-sizing: border-box;
+	align-items: center;
+}
+
+.header-logo {
+	height: 1%;
+} */
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #333; /* Change to your desired background color */
+	padding: 10px; /* Adjust the padding as needed */
+	border-radius: 20px; /* Adjust the border-radius to control rounded corners */
+}
+
+.header-logo {
+	width: auto;
+	height: 50px; /* Set the height of the logo as per your design */
+	max-width: 200px; /* Set a maximum width to limit the logo size */
+	margin-right: 10px; /* Adjust the margin as needed to control spacing */
+}
+
+.header-title {
+	flex: 1; /* Make the title expand to fill available space */
+	text-align: center; /* Center the text */
+	color: #fff; /* Change to your desired text color */
+	font-size: 24px; /* Adjust the font size as needed */
+}
+
+.header-buttons {
+	display: flex;
+	flex-direction: column; /* Set the flex direction to column to place buttons on new lines */
+	gap: 10px; /* Adjust the gap between buttons as needed */
+}
+
+.nav-buttons {
+	padding: 10px 20px; /* Adjust the padding to make the buttons bigger */
+	border: none;
+	border-radius: 15px; /* Adjust the border-radius to create rounded corners */
+	background-color: #242424; /* Change to your desired button background color */
+	color: #fff; /* Change to your desired text color */
+	cursor: pointer;
+	font-size: 16px; /* Adjust the font size as needed */
+}
+
+.nav-buttons:hover {
+	background-color: #083c57; /* Change to the hover background color */
+}
