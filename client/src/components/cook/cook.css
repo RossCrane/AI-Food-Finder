@@ -1,0 +1,37 @@
+.form-input-container {
+	display: flex;
+	flex-wrap: wrap; /* Allow items to wrap onto the next line */
+	gap: 10px;
+}
+
+/* come back to this to ajust the scroll bar and boarder that appears when the input is too long. Maybe use react-custom-scrollbars */
+
+.form-input {
+	flex: 1;
+	border: none;
+	border-radius: 15px;
+	background-color: #2b4f68;
+	color: #fff;
+	font-size: 20px; /* Adjust font size to make text larger */
+	padding: 50px 40px; /* Adjust padding to increase vertical size */
+	margin: 10px 0;
+	white-space: normal; /* Allow text to wrap to the next line */
+	height: auto; /* Allow the button to expand vertically based on content */
+	overflow: auto; /* Enable vertical scrollbar if needed */
+}
+
+.form-input:hover {
+	background-color: #083c57;
+}
+
+@media (max-width: 600px) {
+	.form-input-container {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.form-input {
+		width: 80vw;
+		max-width: 100%; /* Ensure the input doesn't exceed the screen width */
+	}
+}
