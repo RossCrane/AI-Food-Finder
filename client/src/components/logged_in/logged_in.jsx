@@ -1,6 +1,7 @@
 // Dependencies:
 import React from 'react';
 import {
+	useUser,
 	ClerkProvider,
 	SignedIn,
 	// SignedOut,
@@ -27,11 +28,34 @@ function LoggedIn() {
 	const isCookRoute = useMatch('/cook');
 	const isGoOutRoute = useMatch('/go-out');
 
+	// const user = useUser();
+	// console.log(user);
+	// const emailAddress = user ? user.primaryEmailAddress.emailAddress : null;
+	// console.log(emailAddress);
+
+	// const user = useUser();
+	// //console.log(user);
+	// if (!user || !user.primaryEmailAddress) {
+	// 	// User data not loaded yet, show loading message or return null
+	// 	console.log('Waiting for user data to load...');
+	// 	return <div>Loading user data...</div>; // or return null;
+	// }
+
+	// // User data is loaded
+	// const emailAddress = user.primaryEmailAddress.emailAddress;
+	// console.log("User's email address:", emailAddress);
+
 	const handleCookClick = () => {
+		// setMessage(null);
+		// setValue('');
+		// setCurrentTitle(null);
 		navigate('/cook');
 	};
 
 	const handleGoOutClick = () => {
+		// setMessage(null);
+		// setValue('');
+		// setCurrentTitle(null);
 		navigate('/go-out');
 	};
 

@@ -1,33 +1,68 @@
 // Dependencies
-import React from 'react';
-import { Button, Form } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAppContext } from '../../AppContext';
 
 // Components
-import Interests from '../interests/interests.jsx';
+
+// Services
+import { getOptions } from '../../services/services';
 
 // Styling
 import './cook.css';
 
-// change second form to a checkbox of yes or no for if your willing to go to the store
-// <Form.Check type="checkbox" label="I am willing to go to the store" />
-
 const Cook = () => {
+	const navigate = useNavigate();
+	const [submitted, setSubmitted] = useState(false);
+	const [craving, setCraving] = useState('');
+	const [notWant, setNotWant] = useState('');
+	const [ingredients, setIngredients] = useState('');
+	// const [message, setMessage] = useState(null);
+	// const [previousChats, setPreviousChats] = useState([]);
+	// const [currentTitle, setCurrentTitle] = useState(null);
+
+	const { setApiResponse } = useAppContext();
+
+	const handleSubmit = async () => {
+		setSubmitted(true);
+		const data = await getOptions(ingredients, craving, notWant);
+		if (data) {
+			setApiResponse(data);
+			navigate('/options');
+		}
+	};
+
 	return (
 		<div>
 			<div className="form-input-container">
-				<Form.Control
-					as="textarea"
+				<textarea
 					className="form-input"
 					placeholder="Enter on hand ingredients here..."
-				/>
-				<Form.Control
-					as="textarea"
-					className="form-input"
-					placeholder="Input 2"
+					value={ingredients}
+					onChange={(e) => setIngredients(e.target.value)}
 				/>
 			</div>
-			<h2>Cook Page</h2>
-			<Interests />
+			<div>
+				<div className="form-input-container">
+					<textarea
+						className="form-input"
+						placeholder="What foods are you currently craving?"
+						value={craving}
+						onChange={(e) => setCraving(e.target.value)}
+					/>
+					<textarea
+						className="form-input"
+						placeholder="What foods do you currently not want to eat?"
+						value={notWant}
+						onChange={(e) => setNotWant(e.target.value)}
+					/>
+				</div>
+			</div>
+			<div className="submit-button-container">
+				<button className="submit-button" onClick={handleSubmit}>
+					Submit
+				</button>
+			</div>
 		</div>
 	);
 };

@@ -20,8 +20,8 @@ const Header = () => {
 		navigate('/protected');
 	};
 
-	const user = useUser();
-	console.log(user);
+	//const user = useUser();
+	//console.log(user);
 
 	return (
 		<header className="header">

@@ -9,7 +9,6 @@ import {
 	SignUp,
 	// UserButton,
 } from '@clerk/clerk-react';
-// import Button from 'react-bootstrap/Button';
 import {
 	BrowserRouter,
 	Route,
@@ -19,12 +18,13 @@ import {
 	// useMatch,
 } from 'react-router-dom'; // Import Router and Link
 
-// // Components
+// Components
 import Header from './components/header/header.jsx';
 import LoggedIn from './components/logged_in/logged_in.jsx';
 import Cook from './components/cook/cook.jsx';
 import GoOut from './components/go_out/go_out';
 import AIOptions from './components/ai_options/ai_options.jsx';
+import { AppProvider } from './AppContext';
 
 // Styles
 import './App.css';
@@ -137,7 +137,9 @@ function ClerkProviderWithRoutes() {
 function App() {
 	return (
 		<BrowserRouter>
-			<ClerkProviderWithRoutes />
+			<AppProvider>
+				<ClerkProviderWithRoutes />
+			</AppProvider>
 		</BrowserRouter>
 	);
 }
