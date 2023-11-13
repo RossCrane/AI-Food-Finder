@@ -4,7 +4,7 @@ const User = require('../models/usermodel');
 
 const API_KEY = process.env.OPENAI_API_KEY;
 
-// Example prompt cost 54 tokens
+// This is the controller for the OpenAI API
 const getOptions = async (req, res) => {
 	res.set('Access-Control-Allow-Origin', process.env.CLIENT_URL);
 	const options = {
@@ -36,8 +36,7 @@ const getOptions = async (req, res) => {
 
 const updateUserPreferences = async (req, res) => {
 	try {
-		console.log('Request Body:', req.body);
-		// Assuming you are sending the clerkUserId in the request
+		// console.log('Request Body:', req.body);
 		const { clerkUserId, emailAddress, allergies, diets } = req.body;
 
 		// Find the user by Clerk user ID and update their preferences
@@ -69,7 +68,6 @@ const updateUserPreferences = async (req, res) => {
 
 const getUserPreferences = async (req, res) => {
 	try {
-		// Extract the Clerk user ID from the request
 		const { clerkUserId } = req.query;
 		// console.log('Clerk User ID:', clerkUserId);
 
@@ -77,7 +75,6 @@ const getUserPreferences = async (req, res) => {
 			return res.status(400).json({ error: 'Clerk user ID is required' });
 		}
 
-		// Find the user by Clerk user ID
 		const user = await User.findOne({ clerkUserId: clerkUserId });
 
 		if (!user) {

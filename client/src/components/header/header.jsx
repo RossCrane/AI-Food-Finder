@@ -1,12 +1,7 @@
 import React from 'react';
 import logo from '../../assets/utensils-solid.svg';
 import './header.css';
-import {
-	SignedOut,
-	SignedIn,
-	UserButton,
-	// useUser,
-} from '@clerk/clerk-react';
+import { SignedOut, SignedIn, UserButton } from '@clerk/clerk-react';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -18,14 +13,9 @@ const Header = () => {
 	};
 
 	const handleProfile = () => {
-		// Testing
-		// // console.log('navigate to profile, in the future');
+		// console.log('navigate to profile, in the future');
 		navigate('/profile');
 	};
-
-	// Testing
-	// //const user = useUser();
-	// //console.log(user);
 
 	return (
 		<header className="header">

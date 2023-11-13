@@ -1,33 +1,35 @@
-// Dependencies
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppContext } from '../../AppContext';
 import { useUser } from '@clerk/clerk-react';
 
-// Components
-
-// Services
 import { getOptions } from '../../services/services';
 
-// Styling
 import './cook.css';
 
 const Cook = () => {
 	const navigate = useNavigate();
 
-	// State
 	const [submitted, setSubmitted] = useState(false);
-	const [craving, setCraving] = useState('');
-	const [notWant, setNotWant] = useState('');
-	const [ingredients, setIngredients] = useState('');
+	const [formState, setFormState] = useState({
+		craving: '',
+		notWant: '',
+		ingredients: '',
+	});
 
-	//Clerk
 	const { user, isLoaded, isSignedIn } = useUser();
 
-	// Context
 	const { setApiResponse } = useAppContext();
 
-	const handleSubmit = async () => {
+	const handleFormStateChange = (e) => {
+		setFormState((prevFormState) => ({
+			...prevFormState,
+			[e.target.name]: e.target.value,
+		}));
+	};
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
 		if (submitted) return;
 		setSubmitted(true);
 
@@ -38,7 +40,7 @@ const Cook = () => {
 
 		const clerkUserId = user.id;
 
-		const data = await getOptions(clerkUserId, ingredients, craving, notWant);
+		const data = await getOptions(clerkUserId, formState);
 		if (data) {
 			setApiResponse(data);
 			navigate('/options');
@@ -47,41 +49,42 @@ const Cook = () => {
 	};
 
 	return (
-		<div>
-			<div className="form-input-container">
-				<textarea
-					className="form-input"
-					placeholder="Enter on hand ingredients here..."
-					value={ingredients}
-					onChange={(e) => setIngredients(e.target.value)}
-				/>
-			</div>
+		<form onSubmit={handleSubmit}>
 			<div>
 				<div className="form-input-container">
 					<textarea
 						className="form-input"
-						placeholder="What foods are you currently craving?"
-						value={craving}
-						onChange={(e) => setCraving(e.target.value)}
-					/>
-					<textarea
-						className="form-input"
-						placeholder="What foods do you currently not want to eat?"
-						value={notWant}
-						onChange={(e) => setNotWant(e.target.value)}
+						placeholder="Enter on hand ingredients here..."
+						value={formState.ingredients}
+						name="ingredients"
+						onChange={handleFormStateChange}
 					/>
 				</div>
+				<div>
+					<div className="form-input-container">
+						<textarea
+							className="form-input"
+							placeholder="What foods are you currently craving?"
+							value={formState.craving}
+							name="craving"
+							onChange={handleFormStateChange}
+						/>
+						<textarea
+							className="form-input"
+							placeholder="What foods do you currently not want to eat?"
+							value={formState.notWant}
+							name="notWant"
+							onChange={handleFormStateChange}
+						/>
+					</div>
+				</div>
+				<div className="submit-button-container">
+					<button type="submit" className="submit-button" disabled={submitted}>
+						{submitted ? 'Loading...' : 'Submit'}
+					</button>
+				</div>
 			</div>
-			<div className="submit-button-container">
-				<button
-					className="submit-button"
-					onClick={handleSubmit}
-					disabled={submitted}
-				>
-					{submitted ? 'Loading...' : 'Submit'}
-				</button>
-			</div>
-		</div>
+		</form>
 	);
 };
 

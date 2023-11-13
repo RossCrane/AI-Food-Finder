@@ -1,17 +1,14 @@
-// Dependencies
 import React, { useState } from 'react';
 import { useAppContext } from '../../AppContext';
 import { getDetailedRecipe } from '../../services/services';
 
-// Styles
 import './ai_options.css';
 
-// Accordion Component
 const Accordion = ({ title, details, fetchDetails }) => {
 	const [isActive, setIsActive] = useState(false);
 
 	const handleTitleClick = () => {
-		setIsActive(!isActive);
+		setIsActive((prevActive) => !prevActive);
 		if (!isActive) {
 			fetchDetails(title);
 		}
@@ -48,14 +45,12 @@ const Accordion = ({ title, details, fetchDetails }) => {
 	);
 };
 
-// AIOptions Component
 const AIOptions = () => {
 	const { apiResponse } = useAppContext();
 	const [detailedContent, setDetailedContent] = useState({});
 
 	// Function to fetch detailed content
 	const fetchDetailedContent = async (title) => {
-		// Check if details for this title have already been fetched
 		if (detailedContent[title]) {
 			return; // Skip fetching if details are already available
 		}

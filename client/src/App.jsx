@@ -1,4 +1,3 @@
-// Dependencies
 import React from 'react';
 import {
 	ClerkProvider,
@@ -10,7 +9,6 @@ import {
 } from '@clerk/clerk-react';
 import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
 
-// Components
 import Header from './components/header/header.jsx';
 import LoggedIn from './components/logged_in/logged_in.jsx';
 import Cook from './components/cook/cook.jsx';
@@ -19,7 +17,6 @@ import AIOptions from './components/ai_options/ai_options.jsx';
 import Profile from './components/profile/profile.jsx';
 import { AppProvider } from './AppContext';
 
-// Styles
 import './App.css';
 
 if (!import.meta.env.VITE_REACT_APP_CLERK_PUBLISHABLE_KEY) {
@@ -46,11 +43,15 @@ function ClerkProviderWithRoutes() {
 				<Route path="/" element={<PublicPage />} />
 				<Route
 					path="/sign-in/*"
-					element={<SignIn routing="path" path="/sign-in" />}
+					element={
+						<SignIn routing="path" path="/sign-in" redirectUrl="/protected" />
+					}
 				/>
 				<Route
 					path="/sign-up/*"
-					element={<SignUp routing="path" path="/sign-up" />}
+					element={
+						<SignUp routing="path" path="/sign-up" redirectUrl="/protected" />
+					}
 				/>
 				<Route
 					path="/protected"

@@ -1,9 +1,7 @@
-// Dependencies:
 import React, { useEffect } from 'react';
 import { useUser } from '@clerk/clerk-react';
 import { useMatch, useNavigate } from 'react-router-dom';
 
-// Styling:
 import './logged_in.css';
 
 function LoggedIn() {
@@ -12,33 +10,22 @@ function LoggedIn() {
 	const isGoOutRoute = useMatch('/go-out');
 	const { isSignedIn, user, isLoaded } = useUser();
 
-	// Testing
-	// // const user = useUser();
-	// // console.log(user);
-
 	useEffect(() => {
 		if (isLoaded && isSignedIn) {
 			// User data is loaded and user is signed in
 			const emailAddress = user.primaryEmailAddress?.emailAddress;
 			const userId = user.id;
 			if (emailAddress) {
-				console.log("User's email address:", emailAddress);
-				// Here you can store the email address or send it to the backend
+				// console.log("User's email address:", emailAddress);
 			}
 		}
 	}, [isLoaded, isSignedIn, user]);
 
 	const handleCookClick = () => {
-		// setMessage(null);
-		// setValue('');
-		// setCurrentTitle(null);
 		navigate('/cook');
 	};
 
 	const handleGoOutClick = () => {
-		// setMessage(null);
-		// setValue('');
-		// setCurrentTitle(null);
 		navigate('/go-out');
 	};
 
