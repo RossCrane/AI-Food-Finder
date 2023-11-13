@@ -20,6 +20,12 @@ const Header = () => {
 		navigate('/protected');
 	};
 
+	const handleProfile = () => {
+		// Use the navigate function to redirect to the protected page
+		console.log('navigate to profile, in the future');
+		// navigate('/profile');
+	};
+
 	//const user = useUser();
 	//console.log(user);
 
@@ -34,7 +40,12 @@ const Header = () => {
 					</button>
 				</SignedOut>
 				<SignedIn>
-					<UserButton></UserButton>
+					<div className="profile-container">
+						<button className="profile-button" onClick={handleProfile}>
+							Profile
+						</button>
+						<UserButton></UserButton>
+					</div>
 				</SignedIn>
 			</div>
 		</header>

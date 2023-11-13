@@ -58,7 +58,7 @@ export const getGoOutOptions = async (
 	const options = {
 		method: 'POST',
 		body: JSON.stringify({
-			message: `I am hungry and looking to go out to a restaurant. My location is ${countryName}, ${stateName}, ${cityName}.${cravingText}${notWantText} Please provide me with five options. I understand that your data can be out of date, just give me the best options you can.`,
+			message: `I am hungry and looking to go out to a restaurant. My location is ${countryName}, ${stateName}, ${cityName}.${cravingText}${notWantText} Please provide me with five options and remove the preface text before the five options. I understand that your data can be out of date, just give me the best options you can.`,
 		}),
 		headers: {
 			'Content-Type': 'application/json',

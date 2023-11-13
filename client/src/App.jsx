@@ -24,6 +24,7 @@ import LoggedIn from './components/logged_in/logged_in.jsx';
 import Cook from './components/cook/cook.jsx';
 import GoOut from './components/go_out/go_out';
 import AIOptions from './components/ai_options/ai_options.jsx';
+import Profile from './components/profile/profile.jsx';
 import { AppProvider } from './AppContext';
 
 // Styles
@@ -66,6 +67,20 @@ function ClerkProviderWithRoutes() {
 							<SignedIn>
 								<Header></Header>
 								<LoggedIn />
+							</SignedIn>
+							<SignedOut>
+								<RedirectToSignIn />
+							</SignedOut>
+						</>
+					}
+				/>
+				<Route
+					path="/profile"
+					element={
+						<>
+							<SignedIn>
+								<Header></Header>
+								<Profile />
 							</SignedIn>
 							<SignedOut>
 								<RedirectToSignIn />

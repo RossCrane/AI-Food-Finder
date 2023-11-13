@@ -1,6 +1,6 @@
 'use strict';
 
-// const User = require('../models/usermodel');
+const User = require('../models/usermodel');
 
 const APIKEY = process.env.API_KEY;
 
@@ -33,6 +33,34 @@ const getOptions = async (req, res) => {
 	}
 };
 
+const updateUserPreferences = async (req, res) => {
+	try {
+		console.log('Request Body:', req.body);
+		// Assuming you are sending the clerkUserId in the request
+		const { clerkUserId, allergies, diets } = req.body;
+
+		// Find the user by Clerk user ID and update their preferences
+		const updatedUser = await User.findOneAndUpdate(
+			{ clerkUserId: clerkUserId },
+			{ $set: { allergies: allergies, diets: diets } },
+			{ new: true }
+		);
+
+		if (!updatedUser) {
+			return res.status(404).json({ error: 'User not found' });
+		}
+
+		console.log('Updated User:', updatedUser);
+
+		res.json(updatedUser);
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({ error: 'Internal Server Error' });
+	}
+};
+
+module.exports = { getOptions, updateUserPreferences };
+
 // const getEvents = async (req, res) => {
 // 	res.set('Access-Control-Allow-Origin', process.env.CLIENT_URL);
 // 	try {
@@ -61,5 +89,3 @@ const getOptions = async (req, res) => {
 // 		res.status(500).send('error creating event');
 // 	}
 // };
-
-module.exports = { getOptions }; //getEvents, insertEvent

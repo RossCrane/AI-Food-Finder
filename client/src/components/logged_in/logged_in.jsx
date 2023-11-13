@@ -1,5 +1,5 @@
 // Dependencies:
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
 	useUser,
 	ClerkProvider,
@@ -22,28 +22,28 @@ import {
 
 // Styling:
 import './logged_in.css';
+//import { useEffect } from 'react';
 
 function LoggedIn() {
 	const navigate = useNavigate();
 	const isCookRoute = useMatch('/cook');
 	const isGoOutRoute = useMatch('/go-out');
+	const { isSignedIn, user, isLoaded } = useUser();
 
-	// const user = useUser();
-	// console.log(user);
-	// const emailAddress = user ? user.primaryEmailAddress.emailAddress : null;
-	// console.log(emailAddress);
+	const tuser = useUser();
+	console.log(tuser);
 
-	// const user = useUser();
-	// //console.log(user);
-	// if (!user || !user.primaryEmailAddress) {
-	// 	// User data not loaded yet, show loading message or return null
-	// 	console.log('Waiting for user data to load...');
-	// 	return <div>Loading user data...</div>; // or return null;
-	// }
-
-	// // User data is loaded
-	// const emailAddress = user.primaryEmailAddress.emailAddress;
-	// console.log("User's email address:", emailAddress);
+	useEffect(() => {
+		if (isLoaded && isSignedIn) {
+			// User data is loaded and user is signed in
+			const emailAddress = user.primaryEmailAddress?.emailAddress;
+			const userId = user.id;
+			if (emailAddress) {
+				console.log("User's email address:", emailAddress);
+				// Here you can store the email address or send it to the backend
+			}
+		}
+	}, [isLoaded, isSignedIn, user]);
 
 	const handleCookClick = () => {
 		// setMessage(null);
@@ -93,3 +93,20 @@ export default LoggedIn;
 // 		</div>
 // 	);
 // };
+
+// const user = useUser();
+// console.log(user);
+// const emailAddress = user ? user.primaryEmailAddress.emailAddress : null;
+// console.log(emailAddress);
+
+// const user = useUser();
+// //console.log(user);
+// if (!user || !user.primaryEmailAddress) {
+// 	// User data not loaded yet, show loading message or return null
+// 	console.log('Waiting for user data to load...');
+// 	return <div>Loading user data...</div>; // or return null;
+// }
+
+// // User data is loaded
+// const emailAddress = user.primaryEmailAddress.emailAddress;
+// console.log("User's email address:", emailAddress);

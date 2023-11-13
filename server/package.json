@@ -10,6 +10,8 @@
 		"start": "node index.js"
 	},
 	"dependencies": {
+		"@clerk/clerk-sdk-node": "^4.12.21",
+		"cookie-parser": "^1.4.6",
 		"cors": "^2.8.5",
 		"dotenv": "^16.0.3",
 		"express": "^4.18.2",

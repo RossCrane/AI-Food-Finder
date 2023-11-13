@@ -37,6 +37,22 @@ h1 {
 	margin-bottom: 30px; /* Adjust the margin as needed */
 }
 
+.profile-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.profile-button {
+	padding: 6px 16px; /* Adjust the padding to make the buttons bigger */
+	border: none;
+	border-radius: 15px; /* Adjust the border-radius to create rounded corners */
+	background-color: #242424; /* Change to your desired button background color */
+	color: #fff; /* Change to your desired text color */
+	cursor: pointer;
+	font-size: 18px; /* Adjust the font size as needed */
+	margin-right: 1vw;
+}
+
 .header-logo {
 	width: auto;
 	height: 50px; /* Set the height of the logo as per your design */
