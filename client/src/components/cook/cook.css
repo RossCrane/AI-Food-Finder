@@ -71,12 +71,3 @@ textarea {
 		max-width: 100%; /* Ensure the input doesn't exceed the screen width */
 	}
 }
-
-/*
-.form-input-container::-webkit-scrollbar-thumb {
-	background: red;
-	border-radius: 50px;
-	color: red;
-} */
-
-/* come back to this to ajust the scroll bar and boarder that appears when the input is too long. Maybe use react-custom-scrollbars */

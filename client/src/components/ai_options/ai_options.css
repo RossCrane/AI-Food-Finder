@@ -17,8 +17,9 @@ h2 {
 	border-radius: 15px;
 	cursor: pointer;
 	background-color: #2b4f68;
-	height: 8vh;
+	min-height: 8vh;
 	margin-bottom: 11px;
+	align-items: center;
 }
 
 .accordion-title:hover {
@@ -27,20 +28,21 @@ h2 {
 
 .accordion-title,
 .accordion-content {
-	padding-bottom: 1rem;
-	padding-left: 1rem;
-	padding-right: 1rem;
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+	padding-left: 0.5rem;
+	padding-right: 0.5rem;
 }
 
 .accordion-content {
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 600px) {
 	body {
-		font-size: 18px;
+		font-size: 12px;
 	}
 
 	.accordion {
-		width: 90%;
+		width: 100%;
 	}
 }

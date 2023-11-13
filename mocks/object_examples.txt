@@ -140,3 +140,17 @@ clerk opject of header
         "cachedSessionsWithActivities": null
     }
 }
+
+my db object for passing diets and allergies.
+{
+    "_id": "655238547a5e6f233bbeb4de",
+    "clerkUserId": "user_2XuIrjpDu439OcDeO2jZ2NXY701",
+    "__v": 0,
+    "allergies": [
+        "mushrooms"
+    ],
+    "diets": [
+        "keto"
+    ],
+    "emailAddress": "dcranedd@gmail.com"
+}

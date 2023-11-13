@@ -7,16 +7,8 @@ import {
 	RedirectToSignIn,
 	SignIn,
 	SignUp,
-	// UserButton,
 } from '@clerk/clerk-react';
-import {
-	BrowserRouter,
-	Route,
-	Routes,
-	useNavigate,
-	// Link,
-	// useMatch,
-} from 'react-router-dom'; // Import Router and Link
+import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
 
 // Components
 import Header from './components/header/header.jsx';
@@ -40,7 +32,7 @@ function PublicPage() {
 	return (
 		<>
 			<Header></Header>
-			<h1>Public page</h1>
+			<LoggedIn />
 		</>
 	);
 }
@@ -160,52 +152,3 @@ function App() {
 }
 
 export default App;
-
-// attempt
-// function App() {
-// 	return (
-// 		<ClerkProvider publishableKey={clerkPubKey}>
-// 			<Router>
-// 				<Header />
-// 				<Routes>
-// 					<Route path="/cook" element={<Cook />} />
-// 					<Route path="/go-out" element={<GoOut />} />
-// 					<Route path="/ai-options" element={<AIOptions />} />
-// 					{/* Add a route for LoggedIn */}
-// 					<Route
-// 						path="/logged-in"
-// 						element={
-// 							<SignedIn>
-// 								<LoggedIn />
-// 							</SignedIn>
-// 						}
-// 					/>
-// 					<Route path="/*" element={<MainButtons />} />
-// 				</Routes>
-// 			</Router>
-// 		</ClerkProvider>
-// 	);
-// }
-
-// function MainButtons() {
-// 	return (
-// 		<div className="main-buttons">
-// 			<Link to="/cook" className="main-link">
-// 				<button className="main-button">Cook</button>
-// 			</Link>
-
-// 			<Link to="/go-out" className="main-link">
-// 				<button className="main-button">Go Out</button>
-// 			</Link>
-// 		</div>
-// 	);
-// }
-
-// Older attempt
-
-// <SignedOut>{/* <RedirectToSignIn /> */}</SignedOut>
-
-/* <Welcome /> */
-// function Welcome() {
-// 	return <div>Hello you are signed in</div>;
-// }

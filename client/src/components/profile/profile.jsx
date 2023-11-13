@@ -1,3 +1,4 @@
+// Dependencies
 import React, { useState } from 'react';
 import { useUser } from '@clerk/clerk-react';
 import { useNavigate } from 'react-router-dom';
@@ -7,15 +8,16 @@ const Profile = () => {
 	const [allergies, setAllergies] = useState('');
 	const [diets, setDiets] = useState('');
 
-	// const user = useUser();
-	// console.log(user);
+	// Testing
+	// // const user = useUser();
+	// // console.log(user);
 
 	const { user, isLoaded, isSignedIn } = useUser();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log('submitting form and navigate to protected page in the future');
-		// navigate('/protected');
+		// console.log('submitting form and navigate to protected page in the future');
+		navigate('/protected');
 
 		if (!isLoaded || !isSignedIn) {
 			console.error('User data is not fully loaded or user is not signed in.');
@@ -48,8 +50,8 @@ const Profile = () => {
 
 			if (response.ok) {
 				const result = await response.json();
-				console.log('Success:', result);
-				// Handle success - maybe update state or show a success message
+				// console.log('Success:', result);
+				return result;
 			} else {
 				// Handle HTTP errors
 				console.error('HTTP Error:', response.statusText);

@@ -16,24 +16,24 @@ import { getGoOutOptions } from '../../services/services';
 // import Interests from '../interests/interests.jsx';
 
 const GoOut = () => {
+	const navigate = useNavigate();
+
+	// State
 	const [countryid, setCountryid] = useState('');
 	const [countryName, setCountryName] = useState(''); // State for country name
 	const [stateid, setStateid] = useState('');
 	const [stateName, setStateName] = useState(''); // State for state name
 	const [cityid, setCityid] = useState('');
 	const [cityName, setCityName] = useState(''); // State for city name
-
-	const navigate = useNavigate();
 	const [submitted, setSubmitted] = useState(false);
 	const [craving, setCraving] = useState('');
 	const [notWant, setNotWant] = useState('');
-	const [message, setMessage] = useState(null);
-	const [previousChats, setPreviousChats] = useState([]);
-	const [currentTitle, setCurrentTitle] = useState(null);
 
+	// Context
 	const { setApiResponse } = useAppContext();
 
 	const handleSubmit = async () => {
+		if (submitted) return;
 		setSubmitted(true);
 
 		const data = await getGoOutOptions(
@@ -47,6 +47,7 @@ const GoOut = () => {
 			setApiResponse(data); // Update the context with the fetched data
 			navigate('/options');
 		}
+		setSubmitted(false);
 	};
 
 	return (
@@ -97,8 +98,12 @@ const GoOut = () => {
 					/>
 				</div>
 				<div className="submit-button-container">
-					<button className="submit-button" onClick={handleSubmit}>
-						Submit
+					<button
+						className="submit-button"
+						onClick={handleSubmit}
+						disabled={submitted}
+					>
+						{submitted ? 'Loading...' : 'Submit'}
 					</button>
 				</div>
 			</div>

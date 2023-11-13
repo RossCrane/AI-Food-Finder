@@ -1,6 +1,6 @@
 // Dependencies
 import React, { useState } from 'react';
-import { useAppContext } from '../../AppContext'; // Adjust the path as needed
+import { useAppContext } from '../../AppContext';
 import { getDetailedRecipe } from '../../services/services';
 
 // Styles

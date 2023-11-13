@@ -45,6 +45,13 @@
 	background-color: #083c57; /* Change to the hover background color */
 }
 
+.intro-text-details {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+}
+
 @media (max-width: 600px) {
 	.main-buttons {
 		flex-direction: column;
