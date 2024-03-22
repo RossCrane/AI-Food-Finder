@@ -90,7 +90,8 @@ function ClerkProviderWithRoutes() {
 								<Cook />
 							</SignedIn>
 							<SignedOut>
-								<RedirectToSignIn />
+								<Header></Header>
+								<Cook />
 							</SignedOut>
 						</>
 					}
@@ -104,7 +105,8 @@ function ClerkProviderWithRoutes() {
 								<GoOut />
 							</SignedIn>
 							<SignedOut>
-								<RedirectToSignIn />
+								<Header></Header>
+								<GoOut />
 							</SignedOut>
 						</>
 					}
@@ -118,7 +120,8 @@ function ClerkProviderWithRoutes() {
 								<AIOptions />
 							</SignedIn>
 							<SignedOut>
-								<RedirectToSignIn />
+								<Header></Header>
+								<AIOptions />
 							</SignedOut>
 						</>
 					}
@@ -132,7 +135,8 @@ function ClerkProviderWithRoutes() {
 								<Cook />
 							</SignedIn>
 							<SignedOut>
-								<RedirectToSignIn />
+								<Header></Header>
+								<Cook />
 							</SignedOut>
 						</>
 					}

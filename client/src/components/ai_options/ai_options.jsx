@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAppContext } from '../../AppContext';
-import { getDetailedRecipe } from '../../services/services';
+import { getDetailsOfAiOption } from '../../services/services';
 
 import './ai_options.css';
 
@@ -55,7 +55,7 @@ const AIOptions = () => {
 			return; // Skip fetching if details are already available
 		}
 
-		const detailedData = await getDetailedRecipe(title);
+		const detailedData = await getDetailsOfAiOption(title);
 		setDetailedContent((prevState) => ({
 			...prevState,
 			[title]: detailedData,

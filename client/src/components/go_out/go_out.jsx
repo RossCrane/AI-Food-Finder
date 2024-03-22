@@ -51,21 +51,23 @@ const GoOut = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (submitted) return;
-		setSubmitted(true);
+		setSubmitted(true); // Indicate that submission is in progress
 
-		if (!isLoaded || !isSignedIn) {
-			console.error('User data is not fully loaded or user is not signed in.');
-			return;
+		// Use a fallback value for clerkUserId if the user is not signed in or not loaded
+		const clerkUserId = user?.id || null;
+
+		try {
+			// Proceed with calling getCookingOptions even if clerkUserId is null
+			const data = await getGoOutOptions(clerkUserId, formState);
+			if (data) {
+				setApiResponse(data);
+				navigate('/options');
+			}
+		} catch (error) {
+			console.error('Error fetching cooking options:', error);
+		} finally {
+			setSubmitted(false); // Reset submitted state after operation
 		}
-
-		const clerkUserId = user.id;
-
-		const data = await getGoOutOptions(clerkUserId, formState);
-		if (data) {
-			setApiResponse(data);
-			navigate('/options');
-		}
-		setSubmitted(false);
 	};
 
 	return (

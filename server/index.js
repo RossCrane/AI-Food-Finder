@@ -1,7 +1,6 @@
 'use strict';
 
 require('dotenv').config();
-//console.log(process.env.CLERK_SECRET_KEY);
 const express = require('express');
 const { Client } = require('@clerk/clerk-sdk-node');
 const connectDB = require('./models/index');
@@ -20,8 +19,13 @@ connectDB();
 
 app.use(cors(corsOptions));
 
+// Increase the payload limit for JSON and URL-encoded bodies
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
+
 const clerk = new Client(process.env.CLERK_SECRET_KEY);
 
+// Use the router
 app.use(router);
 
 app.listen(process.env.SERVER_PORT, () => {

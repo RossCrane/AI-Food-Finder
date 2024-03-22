@@ -17,10 +17,22 @@ const Header = () => {
 		navigate('/profile');
 	};
 
+	const handleNavigateHome = () => {
+		// console.log('navigate to profile, in the future');
+		navigate('/');
+	};
+
 	return (
 		<header className="header">
-			<img className="header-logo" src={logo} alt="logo" />
-			<h1 className="header-title">AI Food Finder</h1>
+			<img
+				className="header-logo"
+				src={logo}
+				alt="logo"
+				onClick={handleNavigateHome}
+			/>
+			<h1 className="header-title" onClick={handleNavigateHome}>
+				AI Food Finder
+			</h1>
 			<div className="header-buttons">
 				<SignedOut>
 					<button className="nav-buttons" onClick={handleSignIn}>
@@ -30,7 +42,7 @@ const Header = () => {
 				<SignedIn>
 					<div className="profile-container">
 						<button className="profile-button" onClick={handleProfile}>
-							Profile
+							Diets and Allergies
 						</button>
 						<UserButton></UserButton>
 					</div>

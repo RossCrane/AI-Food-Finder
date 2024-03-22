@@ -1,124 +1,95 @@
-export const getOptions = async (
+export const getCookingOptions = async (
 	clerkUserId,
 	{ ingredients, craving, notWant }
 ) => {
-	const cravingText = craving ? ` I am craving ${craving}` : '';
-	const notWantText = notWant ? ` and I do not want ${notWant}` : '';
-
-	let diets = '';
-	let allergies = '';
-
+	console.log('cooking options called in services/frontend');
 	try {
-		const userPrefsResponse = await fetch(
-			`http://localhost:5000/user/preferences?clerkUserId=${clerkUserId}`,
-			{
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json',
-					// Include authentication headers if necessary
-				},
-			}
-		);
-		if (userPrefsResponse.ok) {
-			const userPrefs = await userPrefsResponse.json();
-			diets = userPrefs.diets ? ` I am on a ${userPrefs.diets} diet.` : '';
-			allergies = userPrefs.allergies
-				? ` I am allergic to ${userPrefs.allergies}.`
-				: '';
-		}
-	} catch (error) {
-		console.error('Error fetching user preferences:', error);
-	}
+		const response = await fetch('http://localhost:5000/get-cooking-options', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({
+				clerkUserId, // Pass this as null or undefined if user is not logged in
+				ingredients,
+				craving,
+				notWant,
+			}),
+		});
 
-	const prompt = `I am hungry and looking to cook. I have ${ingredients} on hand.${cravingText}${notWantText}${diets}${allergies}. Please provide me with five options and no additional text before or after. I understand that your data can be out of date, just give me the best options you can.`;
-
-	const options = {
-		method: 'POST',
-		body: JSON.stringify({ message: prompt }),
-		headers: { 'Content-Type': 'application/json' },
-	};
-
-	try {
-		const response = await fetch('http://localhost:5000/completions', options);
-		const data = await response.json();
-		// console.log(data);
-		return data;
+		if (!response.ok) throw new Error(`HTTP Error: ${response.statusText}`);
+		return await response.json();
 	} catch (error) {
 		console.error('Error:', error);
+		throw error;
 	}
 };
 
-export const getDetailedRecipe = async (recipeTitle) => {
-	const options = {
-		method: 'POST',
-		body: JSON.stringify({
-			message: `Can you give me more details for ${recipeTitle}?`,
-		}),
-		headers: {
-			'Content-Type': 'application/json',
-		},
+export const getGoOutOptions = async (clerkUserId, details) => {
+	const payload = {
+		clerkUserId, // It's okay if this is null or undefined
+		...details, // Spread operator to include countryName, stateName, cityName, craving, notWant
 	};
-	try {
-		const response = await fetch('http://localhost:5000/completions', options);
-		const data = await response.json();
-		// console.log(data);
-		return data;
-	} catch (error) {
-		console.error(error);
-	}
-};
-
-export const getGoOutOptions = async (
-	clerkUserId,
-	{ countryName, stateName, cityName, craving, notWant }
-) => {
-	const cravingText = craving ? ` I am craving ${craving}` : '';
-	const notWantText = notWant ? ` and I do not want ${notWant}` : '';
-
-	let diets = '';
-	let allergies = '';
 
 	try {
-		const userPrefsResponse = await fetch(
-			`http://localhost:5000/user/preferences?clerkUserId=${clerkUserId}`,
+		const response = await fetch(
+			'http://localhost:5000/get-going-out-options',
 			{
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json',
-					// Include authentication headers if necessary
-				},
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(payload),
 			}
 		);
-		if (userPrefsResponse.ok) {
-			const userPrefs = await userPrefsResponse.json();
-			diets = userPrefs.diets ? ` I am on a ${userPrefs.diets} diet.` : '';
-			allergies = userPrefs.allergies
-				? ` I am allergic to ${userPrefs.allergies}.`
-				: '';
+
+		if (!response.ok) {
+			// Log more detailed error info for debugging
+			console.error(`HTTP Error: ${response.status} ${response.statusText}`);
+			const errorBody = await response.text(); // Assuming error details are in text format
+			console.error('Error Body:', errorBody);
+			throw new Error('Failed to fetch going out options.');
 		}
+		return await response.json();
 	} catch (error) {
-		console.error('Error fetching user preferences:', error);
+		console.error('Error fetching going out options:', error);
+		throw new Error('Error fetching going out options.'); // Rethrowing a generic error for consumer handling
 	}
+};
 
-	const prompt = `I am hungry and looking to go out to a restaurant. My location is ${countryName}, ${stateName}, ${cityName}.${cravingText}${notWantText}${diets}${allergies} Please provide me with five options and remove the preface text before the five options. I understand that your data can be out of date, just give me the best options you can.`;
-
-	// console.log(prompt);
-
+export const getDetailsOfAiOption = async (AiOption) => {
 	const options = {
 		method: 'POST',
-		body: JSON.stringify({ message: prompt }),
+		body: JSON.stringify({ AiOption }), // Just send the AiOption
 		headers: {
 			'Content-Type': 'application/json',
 		},
 	};
-
 	try {
-		const response = await fetch('http://localhost:5000/completions', options);
+		const response = await fetch('http://localhost:5000/details', options);
 		const data = await response.json();
-		// console.log(data);
 		return data;
 	} catch (error) {
-		console.log(error);
+		console.error('Error fetching details:', error);
+		throw error; // It's good practice to throw the error so the caller can handle it
+	}
+};
+
+export const analyzeImageWithBase64 = async (base64Image) => {
+	try {
+		const response = await fetch('http://localhost:5000/analyze-image', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({ image: base64Image }),
+		});
+
+		if (!response.ok) {
+			throw new Error(`HTTP Error: ${response.statusText}`);
+		}
+
+		const data = await response.json();
+		return data;
+	} catch (error) {
+		console.error('Error sending image for analysis:', error);
+		throw error;
 	}
 };
 

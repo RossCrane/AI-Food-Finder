@@ -33,6 +33,7 @@ h1 {
 	height: 50px; /* Set the height of the logo as per your design */
 	max-width: 200px; /* Set a maximum width to limit the logo size */
 	margin-right: 10px; /* Adjust the margin as needed to control spacing */
+	cursor: pointer;
 }
 
 .header-title {
@@ -40,6 +41,7 @@ h1 {
 	text-align: center; /* Center the text */
 	color: #fff; /* Change to your desired text color */
 	font-size: 24px; /* Adjust the font size as needed */
+	cursor: pointer;
 }
 
 .header-buttons {
